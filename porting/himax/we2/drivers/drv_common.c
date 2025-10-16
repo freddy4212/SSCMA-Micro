@@ -125,7 +125,9 @@ el_img_t _drv_get_jpeg() {
 
     hx_drv_jpeg_get_EncOutRealMEMSize(&reg_val);
     hx_drv_jpeg_get_FillFileSizeToMem(frame_no, (uint32_t)_jpegsize_baseaddr, &mem_val);
-    hx_drv_jpeg_get_MemAddrByFrameNo(frame_no, _wdma2_baseaddr, &_jpeg.data);
+    uint32_t jpeg_addr = 0;
+    hx_drv_jpeg_get_MemAddrByFrameNo(frame_no, _wdma2_baseaddr, &jpeg_addr);
+    _jpeg.data = (uint8_t*)jpeg_addr;
 
     // el_printf("frame_no: %d, reg_val: 0x%x, mem_val: 0x%x\n", frame_no, reg_val, mem_val);
     // el_printf("jpeg: %x, size: 0x%x\n", _jpeg.data, mem_val);
